@@ -1,39 +1,65 @@
-
-
-
+//Find first and last occurence of any element in an array
 #include <iostream>
 using namespace std;
-int binarysearch(int arr[],int size,int key)
+int firstOcc(int arr[],int size,int key)
 {
     int start=0;
     int end=size-1;
     int mid=(start+end)/2;
+    int ans=-1;
     while(start<=end)
     {
         if(arr[mid]==key)
         {
-            return mid;
+            ans=mid;
+            end=mid-1;
         }
         if(key>arr[mid])
         {
             start=mid+1;
         }
-        else{
+       else if
+            (key<arr[mid]){
             end=mid-1;
         }
         mid=(start+end)/2;
     }
-    return -1;
+    return ans;
+}
+int lastOcc(int arr[],int size,int key)
+{
+    int start=0;
+    int end=size-1;
+    int mid=(start+end)/2;
+    int ans=-1;
+    while(start<=end)
+    {
+        if(arr[mid]==key)
+        {
+            ans=mid;
+            start=mid+1;
+        }
+        else if(key>arr[mid])
+        {
+            start=mid+1;
+        }
+        else if
+            (key<arr[mid])
+            {
+            end=mid-1;
+        }
+        mid=(start+end)/2;
+    }
+    return ans;
 }
 int main()
 {
     //don't forget to give input in monotonous function.
-    int even[6]={2,4,6,8,12,18};
-    int odd[5]={3,8,11,14,16};
-    int index=binarysearch(even,6,12);
+    int arr[11]={1,2,3,3,3,3,3,3,3,3,5};
+    int first=firstOcc(arr,11,3);
 
-    cout<<"req index for even array= "<<index<<endl;
-    int index2=binarysearch(odd,5,8);
-    cout<<"req index for odd array= "<<index2<<endl;
+    cout<<"first index = "<<first<<endl;
+    int last=lastOcc(arr,11,3);
+    cout<<"last index = "<<last<<endl;
 
 }
